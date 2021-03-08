@@ -1,0 +1,11 @@
+<h1>hardware page</h1>
+
+<!-- Loops through temporary database and displays name and image. -->
+<% hardware.forEach(function(hardware){ %>
+    <div>
+        <h4><%= hardware.name %></h4>
+        <img src="<%= hardware.image %>">
+    </div>
+    <% });%>
+
+<a href="/">Back</a>
