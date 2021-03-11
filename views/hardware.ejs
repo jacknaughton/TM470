@@ -1,15 +1,19 @@
 <%- include('./partials/header.ejs'); %>
 
-<h1>hardware page</h1>
+    <h1>hardware page</h1>
 
-<!-- Loops through temporary database and displays name and image. -->
-<% hardware.forEach(function(hardware){ %>
-    <div>
-        <h4><%= hardware.name %></h4>
-        <img src="<%= hardware.image %>">
-    </div>
-    <% });%>
+<a href="/hardware/new">Create new hardware post.</a>
 
-<a href="/">Back</a>
+    <!-- Loops through temporary database and displays name and image. -->
+    <% hardware.forEach(function(hardware){ %>
+        <div>
+            <h4>
+                <%= hardware.name %>
+            </h4>
+            <img src="<%= hardware.image %>">
+        </div>
+        <% });%>
 
-<%- include('./partials/footer.ejs'); %>
+            <a href="/">Back</a>
+
+            <%- include('./partials/footer.ejs'); %>

@@ -1,0 +1,14 @@
+<%- include('./partials/header.ejs'); %>
+
+    <h1>New hardware object</h1>
+
+    <!-- Post new hardware object. -->
+    <form action="/hardware" method="POST">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="image" placeholder="image">
+        <button>Post</button>
+    </form>
+
+    <a href="/hardware">Back</a>
+
+    <%- include('./partials/footer.ejs'); %>
