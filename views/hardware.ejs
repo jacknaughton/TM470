@@ -1,19 +1,33 @@
 <%- include('./partials/header.ejs'); %>
+    <div class="container">
+        <header class="jumbotron">
+            <h1>Hardware page</h1>
+            <a class="btn btn-primary btn-lg" href="/hardware/new">Create new hardware post.</a>
+        </header>
 
-    <h1>hardware page</h1>
+        <div class="row" style="display:flex; flex-wrap: wrap;">
 
-<a href="/hardware/new">Create new hardware post.</a>
-
-    <!-- Loops through temporary database and displays name and image. -->
-    <% hardware.forEach(function(hardware){ %>
-        <div>
-            <h4>
-                <%= hardware.name %>
-            </h4>
-            <img src="<%= hardware.image %>">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <!-- Loops through temporary database and displays name and image. -->
+                        <% hardware.forEach(function(hardware){ %>
+                            <div class="col">
+                                <div class="product_grid">
+                                    <img src="<%= hardware.image %>">
+                                    <div class="caption">
+                                        <h4>
+                                            <%= hardware.name %>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <% });%>
+                    </div>
+                </div>
+                <a href="/">Back</a>
+            </div>
         </div>
-        <% });%>
+    </div>
 
-            <a href="/">Back</a>
-
-            <%- include('./partials/footer.ejs'); %>
+    <%- include('./partials/footer.ejs'); %>

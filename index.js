@@ -11,6 +11,16 @@ var hardware = [
     image:
       "https://icdn2.digitaltrends.com/image/digitaltrends/amd-ryzen-7-cpu-inhandpins-3-510x510-c-ar1.jpg",
   },
+  {
+    name: "cpu2",
+    image:
+      "https://icdn2.digitaltrends.com/image/digitaltrends/amd-ryzen-7-cpu-inhandpins-3-510x510-c-ar1.jpg",
+  },
+  {
+    name: "cpu3",
+    image:
+      "https://icdn2.digitaltrends.com/image/digitaltrends/amd-ryzen-7-cpu-inhandpins-3-510x510-c-ar1.jpg",
+  },
 ];
 
 //Set all routes to ejs files.
