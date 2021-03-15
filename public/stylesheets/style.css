@@ -1,11 +1,15 @@
-body{
-    background-color: aqua;
+body {
+  background-color: red;
 }
 
-.product_grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    justify-items: center;
-    grid-gap: 5px;
-    grid-row-gap: 0px;;
+.image-responsive {
+  width: 100%;
+}
+
+.img-thumbnail {
+  padding: 0;
+}
+
+.img-thumbnail .caption-full {
+  padding: 15px;
 }

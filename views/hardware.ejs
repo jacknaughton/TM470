@@ -8,26 +8,28 @@
         <div class="row" style="display:flex; flex-wrap: wrap;">
 
             <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <!-- Loops through temporary database and displays name and image. -->
-                        <% hardware.forEach(function(hardware){ %>
-                            <div class="col">
-                                <div class="product_grid">
-                                    <img src="<%= hardware.image %>">
-                                    <div class="caption">
-                                        <h4>
-                                            <%= hardware.name %>
-                                        </h4>
-                                    </div>
-                                </div>
+                <div class="col-md-9">
+                    <% hardware.forEach(function(hardware){ %>
+                        <div class="img-thumbnail">
+                            <img src="<%= hardware.image %>">
+                            <div class="caption-full">
+                                <h4>
+                                    <%= hardware.name %>
+                                </h4>
                             </div>
-                            <% });%>
-                    </div>
+                        </div>
+                    <% });%>
                 </div>
-                <a href="/">Back</a>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <a href="/">Back</a>
+
 
     <%- include('./partials/footer.ejs'); %>
