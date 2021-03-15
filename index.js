@@ -3,9 +3,25 @@ var app = express();
 var bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 //Temorary database.
 var hardware = [
+  {
+    name: "cpu",
+    image:
+      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
+  },
+  {
+    name: "cpu2",
+    image:
+      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
+  },
+  {
+    name: "cpu3",
+    image:
+      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
+  },
   {
     name: "cpu",
     image:

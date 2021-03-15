@@ -5,29 +5,28 @@
             <a class="btn btn-primary btn-lg" href="/hardware/new">Create new hardware post.</a>
         </header>
 
-        <div class="row" style="display:flex; flex-wrap: wrap;">
 
-            <div class="container">
-                <div class="col-md-9">
-                    <% hardware.forEach(function(hardware){ %>
+        <div class="container">
+            <div class="row">
+                <% hardware.forEach(function(hardware){ %>
+                    <div class="col-sm-3">
+
                         <div class="img-thumbnail">
-                            <img src="<%= hardware.image %>">
+                            <img src=" <%=hardware.image %>">
                             <div class="caption-full">
                                 <h4>
                                     <%= hardware.name %>
                                 </h4>
                             </div>
                         </div>
+
+                    </div>
                     <% });%>
-                </div>
             </div>
         </div>
+
+
     </div>
-
-
-
-
-
 
     <a href="/">Back</a>
 

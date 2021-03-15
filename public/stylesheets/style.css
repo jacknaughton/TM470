@@ -1,15 +1,11 @@
-body {
-  background-color: red;
-}
-
-.image-responsive {
-  width: 100%;
-}
-
 .img-thumbnail {
   padding: 0;
 }
 
-.img-thumbnail .caption-full {
-  padding: 15px;
+.caption-full {
+  padding: 5px;
+}
+
+img {
+  width: 100%;
 }
