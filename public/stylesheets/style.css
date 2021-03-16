@@ -9,3 +9,9 @@
 img {
   width: 100%;
 }
+
+.form-centre{
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+}
