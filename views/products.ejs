@@ -1,20 +1,20 @@
 <%- include('./partials/header.ejs'); %>
     <div class="container">
         <header class="jumbotron">
-            <h1>Hardware page</h1>
-            <a class="btn btn-primary btn-lg" href="/hardware/new">Create new hardware post.</a>
+            <h1>Products page</h1>
+            <a class="btn btn-primary btn-lg" href="/products/new">Create new product post.</a>
         </header>
 
 
         <div class="container">
             <div class="row">
-                <% hardware.forEach(function(hardware){ %>
+                <% products.forEach(function(products){ %>
                     <div class="col-sm-3">
                         <div class="img-thumbnail">
-                            <img src=" <%=hardware.image %>">
+                            <img src=" <%=products.image %>">
                             <div class="caption-full">
                                 <h4>
-                                    <%= hardware.name %>
+                                    <%= products.name %>
                                 </h4>
                             </div>
                         </div>

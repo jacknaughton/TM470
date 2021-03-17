@@ -2,42 +2,46 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/products", {
+  useNewUrlParser: true,
+});
 
-//Temorary database.
-var hardware = [
-  {
-    name: "cpu",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-  {
-    name: "cpu2",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-  {
-    name: "cpu3",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-  {
-    name: "cpu",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-  {
-    name: "cpu2",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-  {
-    name: "cpu3",
-    image:
-      "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-  },
-];
+//Schema setup
+var productSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+});
+
+var Product = mongoose.model("Product", productSchema);
+// Product.create(
+//   {
+//   name: "cpu",
+//   image: "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
+// }, function(e, product){
+//   if(e){
+//     console.log(e);
+//   } else {
+//     console.log("New product created: ");
+//     console.log(product)
+//   }
+// });
+
+// Product.create(
+//   {
+//   name: "ram",
+//   image: "https://images-na.ssl-images-amazon.com/images/I/419SRJu4kHL._AC_.jpg",
+// }, function(e, product){
+//   if(e){
+//     console.log(e);
+//   } else {
+//     console.log("New product created: ");
+//     console.log(product)
+//   }
+// });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 
 //Set all routes to ejs files.
 app.set("view engine", "ejs");
@@ -47,23 +51,36 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-//Sends you to the hardware page.
-app.get("/hardware", function (req, res) {
-  //Passing throughh the data.
-  res.render("hardware", { hardware: hardware });
+//Sends you to the products page.
+app.get("/products", function (req, res) {
+  //Get all products from the database.
+  Product.find({}, function (e, allProducts) {
+    if (e) {
+      console.log(e);
+    } else {
+      res.render("products", { products: allProducts });
+    }
+  });
 });
 
-//Create new hardware object.
-app.post("/hardware", function (req, res) {
+//Create new product object.
+app.post("/products", function (req, res) {
   var name = req.body.name;
   var image = req.body.image;
-  var newHardware = { name: name, image: image };
-  hardware.push(newHardware);
-  res.redirect("/hardware");
+  var newProduct = { name: name, image: image };
+  //Create a new product then save it to the database.
+  Product.create(newProduct, function (e, createdProduct) {
+    if (e) {
+      console.log(e);
+    } else {
+      res.redirect("/products");
+    }
+  });
+  // res.redirect("/products");
 });
 
-//Shows form to create new hardware object
-app.get("/hardware/new", function (req, res) {
+//Shows form to create new product object
+app.get("/products/new", function (req, res) {
   res.render("new");
 });
 
