@@ -3,8 +3,14 @@ var app = express();
 var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/products", {
-  useNewUrlParser: true,
+// mongoose.connect("mongodb://localhost:27017/products", {
+//   useNewUrlParser: true,
+// });
+
+const uri = "mongodb+srv://jacknaughton1:34Bxo1WBDhxxXara@tm470.rorwa.mongodb.net/project?retryWrites=true&w=majority";
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
+    if (err) { console.log(err); } 
+    else { console.log("Connected to database");}
 });
 
 //Schema setup
@@ -14,31 +20,31 @@ var productSchema = new mongoose.Schema({
 });
 
 var Product = mongoose.model("Product", productSchema);
-// Product.create(
-//   {
-//   name: "cpu",
-//   image: "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-// }, function(e, product){
-//   if(e){
-//     console.log(e);
-//   } else {
-//     console.log("New product created: ");
-//     console.log(product)
-//   }
-// });
+Product.create(
+  {
+  name: "cpu",
+  image: "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
+}, function(e, product){
+  if(e){
+    console.log(e);
+  } else {
+    console.log("New product created: ");
+    console.log(product)
+  }
+});
 
-// Product.create(
-//   {
-//   name: "ram",
-//   image: "https://images-na.ssl-images-amazon.com/images/I/419SRJu4kHL._AC_.jpg",
-// }, function(e, product){
-//   if(e){
-//     console.log(e);
-//   } else {
-//     console.log("New product created: ");
-//     console.log(product)
-//   }
-// });
+Product.create(
+  {
+  name: "ram",
+  image: "https://images-na.ssl-images-amazon.com/images/I/419SRJu4kHL._AC_.jpg",
+}, function(e, product){
+  if(e){
+    console.log(e);
+  } else {
+    console.log("New product created: ");
+    console.log(product)
+  }
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
