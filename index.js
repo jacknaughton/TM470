@@ -3,10 +3,8 @@ var app = express();
 var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
-//Offline database.
-// mongoose.connect("mongodb://localhost:27017/products", {
-//   useNewUrlParser: true,
-// });
+
+var Product = require("./models/products")
 
 //Cloud database.
 const uri =
@@ -23,14 +21,7 @@ mongoose.connect(
   }
 );
 
-//Schema setup
-var productSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String,
-});
 
-var Product = mongoose.model("Product", productSchema);
 // Product.create(
 //   {
 //   name: "cpu",
