@@ -1,13 +1,19 @@
 <%- include('./partials/header.ejs'); %>
 
     <h1>
-        <%=products.name%>
+        <%= products.name %>
     </h1>
 
-    <img src="<%= products.image%>">
+    <img src="<%= products.image %>">
 
     <p>
-        <%products.description%>
+        <%= products.description %>
     </p>
 
-    <%- include('./partials/footer.ejs'); %>
+    <% products.comments.forEach(function(comment){ %>
+        <p>
+            <%= comment.author %> - <%= comment.text %>
+        </p>
+        <% }); %>
+
+            <%- include('./partials/footer.ejs'); %>

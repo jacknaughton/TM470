@@ -4,7 +4,9 @@ var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
 
-var Product = require("./models/products")
+var Product = require("./models/products");
+
+var seedDB = require("./views/seeds");
 
 //Cloud database.
 const uri =
@@ -21,33 +23,7 @@ mongoose.connect(
   }
 );
 
-
-// Product.create(
-//   {
-//   name: "cpu",
-//   image: "https://i.ebayimg.com/images/g/Ox4AAOSwEYNfBb~s/s-l300.jpg",
-//   description: "Test description."
-// }, function(e, product){
-//   if(e){
-//     console.log(e);
-//   } else {
-//     console.log("New product created: ");
-//     console.log(product)
-//   }
-// });
-
-// Product.create(
-//   {
-//   name: "ram",
-//   image: "https://images-na.ssl-images-amazon.com/images/I/419SRJu4kHL._AC_.jpg",
-// }, function(e, product){
-//   if(e){
-//     console.log(e);
-//   } else {
-//     console.log("New product created: ");
-//     console.log(product)
-//   }
-// });
+seedDB();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -96,7 +72,7 @@ app.get("/products/new", function (req, res) {
 //Show route: Render show template with given id.
 app.get("/products/:id", function (req, res) {
   //Find product with given id.
-  Product.findById(req.params.id, function (e, foundProduct) {
+  Product.findById(req.params.id).populate("comments").exec(function (e, foundProduct) {
     if (e) {
       console.log(e);
     } else {
