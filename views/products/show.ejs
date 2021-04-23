@@ -1,23 +1,59 @@
 <%- include('../partials/header.ejs'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">Contents</p>
+                <div class="list-group">
+                    <li class="list-group-item">Post</li>
+                    <li class="list-group-item">Comments</li>
+                    <li class="list-group-item">Item 3</li>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="img-thumbnail" style="margin: 10px">
+                    <div class="caption-full">
+                        <h1>
+                            <%= products.name %>
+                        </h1>
+                    </div>
+                    <img src="<%= products.image %>">
+                    <p>
+                        <%= products.description %>
+                    </p>
+                </div>
+                <div class="well">
+                    <div>
+                        <a class="btn btn-primary" href="/products/<%= products._id %>/comments/new">Add comment</a>
+                    </div>
+                    <% products.comments.forEach(function(comment){ %>
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <strong><%= comment.author %></strong>
+                                    <div class="float-right">
+                                        <p>1 day ago</p>
+                                    </div>
+                                    <p>
+                                        <%= comment.text %>
+                                    </p>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h1>
-        <%= products.name %>
-    </h1>
 
-    <p>
-        <a href="/products/<%= products._id %>/comments/new">Add comment</a>
-    </p>
 
-    <img src="<%= products.image %>">
 
-    <p>
-        <%= products.description %>
-    </p>
 
-    <% products.comments.forEach(function(comment){ %>
-        <p>
-            <%= comment.author %> - <%= comment.text %>
-        </p>
-        <% }); %>
 
-            <%- include('../partials/footer.ejs'); %>
+
+
+
+
+
+
+
+
+    <%- include('../partials/footer.ejs'); %>

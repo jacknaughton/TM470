@@ -8,7 +8,6 @@ var Product = require("./models/products");
 var Comment = require("./models/comment");
 
 var seedDB = require("./views/seeds");
-const { resolveInclude } = require("ejs");
 
 //Cloud database.
 const uri =
