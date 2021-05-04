@@ -6,8 +6,32 @@ var mongoose = require("mongoose");
 
 var Product = require("./models/products");
 var Comment = require("./models/comment");
+var User = require("./models/user");
 
 var seedDB = require("./views/seeds");
+
+var passport = require("passport");
+var passport_local = require("passport-local");
+
+index.use(
+  require("express-session")({
+    secret: "password",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+index.use(passport.initialize());
+index.use(passport.session());
+passport.use(new passport_local(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//Middleware
+index.use(function(req,res,next){
+  res.locals.activeUser = req.user;
+  next();
+})
 
 //Cloud database.
 const uri =
@@ -44,7 +68,9 @@ index.get("/products", function (req, res) {
     if (e) {
       console.log(e);
     } else {
-      res.render("products/products", { products: allProducts });
+      res.render("products/products", {
+        products: allProducts
+      });
     }
   });
 });
@@ -70,7 +96,7 @@ index.get("/products/new", function (req, res) {
   res.render("products/new");
 });
 
-//Show route: Render show template with given id.
+//Show route: Render products show template with given id.
 index.get("/products/:id", function (req, res) {
   //Find product with given id.
   Product.findById(req.params.id)
@@ -84,34 +110,80 @@ index.get("/products/:id", function (req, res) {
     });
 });
 
-index.get("/products/:id/comments/new", function (req, res) {
+//New route: Shows form to create new comment for products.
+index.get("/products/:id/comments/new", userLoggedIn, function (req, res) {
   Product.findById(req.params.id, function (e, products) {
     if (e) {
       console.log(e);
     } else {
-      res.render("comments/new", {products: products});
+      res.render("comments/new", { products: products });
     }
   });
 });
 
-index.post("/products/:id/comments", function(req,res){
-  Product.findById(req.params.id, function(e, product){
-    if(e){
+//Create route: Create new comment object.
+index.post("/products/:id/comments", userLoggedIn, function (req, res) {
+  Product.findById(req.params.id, function (e, product) {
+    if (e) {
       console.log(e);
       res.redirect("/products");
     } else {
-      Comment.create(req.body.comment, function(e, comment){
-        if(e){
+      Comment.create(req.body.comment, function (e, comment) {
+        if (e) {
           console.log(e);
-        } else{
+        } else {
           product.comments.push(comment);
           product.save();
           res.redirect("/products/" + product._id);
         }
-      })
+      });
     }
+  });
+});
+
+//Show route: Show register form.
+index.get("/register", function (req, res) {
+  res.render("register");
+});
+
+index.post("/register", function (req, res) {
+  var newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, function (e, user) {
+    if (e) {
+      console.log(e);
+      return res.render("register");
+    }
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/products");
+    });
+  });
+});
+
+//Show route: Show login form.
+index.get("/login", function (req, res) {
+  res.render("login");
+});
+
+index.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/products",
+    failureRedirect: "/login",
   })
-})
+);
+
+//Logout route
+index.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/products");
+});
+
+function userLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 //Starts the server.
 index.listen(3000, function () {
