@@ -20,6 +20,10 @@
                     <p>
                         <%= products.description %>
                     </p>
+                    <p>
+                        Uploaded by
+                        <strong><%= products.author.username %></strong>
+                    </p>
                 </div>
                 <div class="well">
                     <div>
@@ -27,14 +31,16 @@
                     </div>
                     <% products.comments.forEach(function(comment){ %>
                         <div class="row">
-                            <div class="col-md-12"> 
-                                <strong><%= comment.author %></strong>
-                                    <div class="float-right">
-                                        <p>1 day ago</p>
-                                    </div>
-                                    <p>
-                                        <%= comment.text %>
-                                    </p>
+                            <div class="col-md-12">
+                                <strong>
+                                    <%= comment.author.username %>
+                                </strong>
+                                <div class="float-right">
+                                    <p>1 day ago</p>
+                                </div>
+                                <p>
+                                    <%= comment.text %>
+                                </p>
                             </div>
                         </div>
                         <% }); %>
