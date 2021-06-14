@@ -3,6 +3,8 @@ var router = express.Router();
 
 var Product = require("../models/products");
 
+var middleware = require("../middleware/middleware.js");
+
 //Index route: Sends you to the products page.
 router.get("/", function (req, res) {
     //Get all products from the database.
@@ -18,7 +20,7 @@ router.get("/", function (req, res) {
 });
 
 //Create route: Create new product object.
-router.post("/", userLoggedIn, function (req, res) {
+router.post("/", middleware.userLoggedIn, function (req, res) {
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -30,20 +32,21 @@ router.post("/", userLoggedIn, function (req, res) {
         author: author,
         description: description,
         image: image,
-        name: name        
+        name: name
     };
     //Create a new product then save it to the database.
     Product.create(newProduct, function (e, createdProduct) {
         if (e) {
             console.log(e);
         } else {
+            console.log(createdProduct)
             res.redirect("/products");
         }
     });
 });
 
 //New route: Shows form to create new product object
-router.get("/new", userLoggedIn, function (req, res) {
+router.get("/new", middleware.userLoggedIn, function (req, res) {
     res.render("products/new");
 });
 
@@ -61,12 +64,33 @@ router.get("/:id", function (req, res) {
         });
 });
 
-//Middleware: Logs the user out of the session.
-function userLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
+//Edit route: Render edit form using given ID.
+router.get("/:id/edit", middleware.productOwnership, function (req, res) {
+    Product.findById(req.params.id, function (e, foundProduct) {
+        res.render("products/edit", { product: foundProduct });
+    });
+});
+
+//Update route: Updates object using given ID from form.
+router.put("/:id", middleware.productOwnership, function (req, res) {
+    Product.findByIdAndUpdate(req.params.id, req.body.product, function (e, updatedProduct) {
+        if (e) {
+            res.redirect("/products")
+        } else {
+            res.redirect("/products/" + req.params.id)
+        }
+    })
+});
+
+//Destroy route:
+router.delete("/:id", middleware.productOwnership, function (req, res) {
+    Product.findByIdAndRemove(req.params.id, function (e) {
+        if (e) {
+            res.redirect("/products");
+        } else {
+            res.redirect("/products");
+        }
+    })
+});
 
 module.exports = router;
