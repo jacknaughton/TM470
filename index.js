@@ -69,6 +69,6 @@ index.use("/products/:id/comments", commentsRoutes);
 index.use("/products", productsRoutes);
 
 //Starts the server.
-index.listen(3000, function () {
+index.listen(3000 || process.env.PORT, function () {
   console.log("Server started.");
 });
