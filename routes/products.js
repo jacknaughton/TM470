@@ -5,7 +5,7 @@ var Product = require("../models/products");
 
 var middleware = require("../middleware/middleware.js");
 
-const products = require("../models/products");
+var moment = require("moment");
 
 //Index route: Sends you to the products page.
 router.get("/", function (req, res) {
@@ -61,7 +61,11 @@ router.get("/:id", function (req, res) {
             if (e) {
                 console.log(e);
             } else {
-                res.render("products/show", { products: foundProduct });
+                var fromNowArray = [];
+                for (i = 0; i < foundProduct.comments.length; i++) {
+                    fromNowArray[i] = moment(foundProduct.comments[i].date).fromNow()
+                }
+                res.render("products/show", { products: foundProduct, fromNow: fromNowArray });
             }
         });
 });
