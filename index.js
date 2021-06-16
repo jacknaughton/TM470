@@ -4,11 +4,7 @@ var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
 
-// var Product = require("./models/products");
-// var Comment = require("./models/comment");
 var User = require("./models/user");
-
-var seedDB = require("./views/seeds");
 
 var passport = require("passport");
 var passport_local = require("passport-local");

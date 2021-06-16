@@ -1,4 +1,6 @@
 <%- include('../partials/header.ejs'); %>
+
+<title><%= products.name %></title>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -44,7 +46,7 @@
                                     <%= comment.author.username %>
                                 </strong>
                                 <div class="float-right">
-                                    <p>1 day ago</p>
+                                    <p><%= comment.date %></p>
                                 </div>
                                 <p>
                                     <%= comment.text %>

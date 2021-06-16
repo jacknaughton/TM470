@@ -5,6 +5,8 @@ var Product = require("../models/products");
 
 var middleware = require("../middleware/middleware.js");
 
+const products = require("../models/products");
+
 //Index route: Sends you to the products page.
 router.get("/", function (req, res) {
     //Get all products from the database.

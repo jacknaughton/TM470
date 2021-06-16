@@ -30,6 +30,7 @@ router.post("/", middleware.userLoggedIn, function (req, res) {
                 } else {
                     comment.author.id = req.user._id;
                     comment.author.username = req.user.username;
+                    comment.date = new Date();
                     console.log(req.user.username)
                     product.comments.push(comment);
                     comment.save();
