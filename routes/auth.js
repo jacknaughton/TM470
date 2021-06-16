@@ -47,12 +47,4 @@ router.get("/logout", function (req, res) {
     res.redirect("/products");
 });
 
-//Middleware: Logs the user out of the session.
-// function userLoggedIn(req, res, next) {
-//     if (req.isAuthenticated()) {
-//         return next();
-//     }
-//     res.redirect("/login");
-// }
-
 module.exports = router;
