@@ -68,7 +68,7 @@ router.put("/:commentID", function(req,res){
 router.delete("/:commentID", middleware.commentOwnership, function(req,res){
     Comment.findByIdAndRemove(req.params.commentID, function(e){
         if(e){
-            res.reditect("back");
+            res.redirect("back");
         } else {
             res.redirect("/products/" + req.params.id);
         }

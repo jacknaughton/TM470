@@ -1,6 +1,8 @@
 <%- include('../partials/header.ejs'); %>
 
-<title><%= products.name %></title>
+    <title>
+        <%= products.name %>
+    </title>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -46,7 +48,9 @@
                                     <%= comment.author.username %>
                                 </strong>
                                 <div class="float-right">
-                                    <p><%= fromNow[i] %></p>
+                                    <p>
+                                        <%= fromNow[i] %>
+                                    </p>
                                 </div>
                                 <p>
                                     <%= comment.text %>
@@ -67,18 +71,5 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <%- include('../partials/footer.ejs'); %>

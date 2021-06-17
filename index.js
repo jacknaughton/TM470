@@ -24,6 +24,7 @@ index.use(
   })
 );
 
+//PassportJS
 index.use(passport.initialize());
 index.use(passport.session());
 passport.use(new passport_local(User.authenticate()));
@@ -51,8 +52,6 @@ mongoose.connect(
   }
 );
 
-// seedDB();
-
 index.use(bodyParser.urlencoded({ extended: true }));
 index.use(express.static(__dirname + "/public"));
 index.use(methodOverride("_method"));
@@ -60,6 +59,7 @@ index.use(methodOverride("_method"));
 //Set all routes to ejs files.
 index.set("view engine", "ejs");
 
+//Completes part of the route.
 index.use(authRoutes);
 index.use("/products/:id/comments", commentsRoutes);
 index.use("/products", productsRoutes);
