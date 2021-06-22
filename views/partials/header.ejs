@@ -2,49 +2,49 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <!-- Link to bootstrap stylesheet. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
+  <!-- Link to my own stylesheet. -->
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-    crossorigin="anonymous"></script>
+  <!-- Link to bootstrap javascript. -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Logo</a>
+<!-- Nav bar from bootstrap website customised to fit my purpose. -->
+<nav class="navbar navbar-expand-lg navbar-light" style="border-bottom: 1px solid black;">
+  <a class="navbar-brand" style="width: 5%;" href="/"><img
+      src="https://drive.google.com/thumbnail?id=1WQeCA0MYFhP9lKjRaStRi9e6Ch7-Q2Jo"></a>
 
+  <!-- Bootstrap button used to collapse the navbar on a smaller screen -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto"">
+      <!-- If the active user is not logged in, the Login and Sign Up buttons are visible. -->
       <% if(!activeUser){ %>
+        <li class=" nav-item">
+      <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register">Sign up</a>
+      </li>
+      <!-- If there is an active user logged in, display their username and remove the login and sign up buttons. -->
+      <% } else{ %>
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="#">
+            <%=activeUser.username%>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/register">Sign up</a>
+          <a class="nav-link" href="/logout">Logout</a>
         </li>
-        <% } else{ %>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <%=activeUser.username%>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-          <% } %>
+        <% } %>
   </div>
 </nav>
 

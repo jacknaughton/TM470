@@ -44,19 +44,19 @@ router.post("/", middleware.userLoggedIn, function (req, res) {
 
 //Edit route: Edit the comment using a given ID.
 router.get("/:commentID/edit", middleware.commentOwnership, function (req, res) {
-    Comment.findById(req.params.commentID, function(e, foundComment){
-        if(e){
+    Comment.findById(req.params.commentID, function (e, foundComment) {
+        if (e) {
             res.redirect("back");
         } else {
-            res.render("comments/edit", {products_id: req.params.id, comment: foundComment});
+            res.render("comments/edit", { products_id: req.params.id, comment: foundComment });
         }
-    });    
+    });
 });
 
 //Update route: Update the comment using the ID.
-router.put("/:commentID", function(req,res){
-    Comment.findByIdAndUpdate(req.params.commentID, req.body.comment, function(e, updatedComment){
-        if(e){
+router.put("/:commentID", function (req, res) {
+    Comment.findByIdAndUpdate(req.params.commentID, req.body.comment, function (e, updatedComment) {
+        if (e) {
             res.redirect("back");
         } else {
             res.redirect("/products/" + req.params.id)
@@ -64,10 +64,10 @@ router.put("/:commentID", function(req,res){
     })
 })
 
-//Destroy route: Removes the comment.
-router.delete("/:commentID", middleware.commentOwnership, function(req,res){
-    Comment.findByIdAndRemove(req.params.commentID, function(e){
-        if(e){
+//Destroy route: Removes the comment if the active user is authenticated to do so.
+router.delete("/:commentID", middleware.commentOwnership, function (req, res) {
+    Comment.findByIdAndRemove(req.params.commentID, function (e) {
+        if (e) {
             res.redirect("back");
         } else {
             res.redirect("/products/" + req.params.id);

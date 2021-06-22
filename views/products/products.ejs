@@ -1,32 +1,35 @@
 <%- include('../partials/header.ejs'); %>
+    <title>
+        Products
+    </title>
     <div class="container">
         <div class="jumbotron">
-            <h1>Products page</h1>
+            <h1 class="display-1">Products page</h1>
+            <!-- Sends the user to the create post route. -->
             <a class="btn btn-primary btn-lg" href="/products/new">Create new product post.</a>
         </div>
 
         <div class="container">
             <div class="row">
+                <!-- For each of the posts stored on the database, it will loop through each one and display them. -->
                 <% products.forEach(function(products){ %>
                     <div class="col-sm-3">
-                        <div class="img-thumbnail">
-                            <img src=" <%=products.image %>">
-                            <div class="caption-full">
-                                <h4>
-                                    <%= products.name %>
-                                </h4>
-                                <p>
-                                    <a href="/products/<%=products._id%>" class="btn btn-lg btn-primary">More
-                                        information</a>
-                                </p>
-                            </div>
-                        </div>
+                        <!-- Creates the link to the correct id of the post. -->
+                        <a href="/products/<%=products._id%>">
+                            <!-- Displays the thumbnail of the image linked to the post. -->
+                            <div class="img-thumbnail">
+                                <img src=" <%=products.image %>">
+                                <div class="caption-full">
+
+                                    <button type="button" class="btn btn-info btn-block">
+                                        <!-- Displays the name of the post object. -->
+                                        <%= products.name %>
+                                    </button>
+                        </a>
                     </div>
-                    <% });%>
             </div>
         </div>
+        <% });%>
     </div>
-
-    <a href="/">Back</a>
 
     <%- include('../partials/footer.ejs'); %>

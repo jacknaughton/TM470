@@ -5,30 +5,24 @@
     </title>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <p class="lead">Contents</p>
-                <div class="list-group">
-                    <li class="list-group-item">Post</li>
-                    <li class="list-group-item">Comments</li>
-                    <li class="list-group-item">Item 3</li>
-                </div>
-            </div>
             <div class="col-md-9">
+                <!-- Content about the post. -->
                 <div class="img-thumbnail" style="margin: 10px">
                     <div class="caption-full">
-                        <h1>
+                        <h1 class="display-1">
                             <%= products.name %>
                         </h1>
+                        <p>
+                            Uploaded by
+                            <strong>
+                                <!-- Displays the name of the author of the post. -->
+                                <%= products.author.username %>
+                            </strong>
+                        </p>
                     </div>
                     <img src="<%= products.image %>">
-                    <p>
+                    <p class="lead">
                         <%= products.description %>
-                    </p>
-                    <p>
-                        Uploaded by
-                        <strong>
-                            <%= products.author.username %>
-                        </strong>
                     </p>
                     <% if(activeUser && products.author.id.equals(activeUser._id)){ %>
                         <a class="btn btn-warning" href="/products/<%=products._id%>/edit">Edit product</a>
@@ -37,24 +31,26 @@
                         </form>
                         <% } %>
                 </div>
+
+                <!-- Comments section -->
                 <div class="well">
                     <div>
                         <a class="btn btn-primary" href="/products/<%= products._id %>/comments/new">Add comment</a>
                     </div>
                     <% products.comments.forEach(function(comment, i){ %>
-                        <div class="row">
+                        <div class="row" style="border-bottom: 1px solid grey;">
                             <div class="col-md-12">
-                                <strong>
-                                    <%= comment.author.username %>
-                                </strong>
                                 <div class="float-right">
                                     <p>
                                         <%= fromNow[i] %>
                                     </p>
                                 </div>
-                                <p>
+                                <dt class="text-truncate">
+                                    <%= comment.author.username %>
+                                </dt>
+                                <dd>
                                     <%= comment.text %>
-                                </p>
+                                </dd>
                                 <% if(activeUser && comment.author.id.equals(activeUser._id)){ %>
                                     <a class="btn btn-warning"
                                         href="/products/<%=products._id%>/comments/<%=comment._id%>/edit">Edit

@@ -88,7 +88,7 @@ router.put("/:id", middleware.productOwnership, function (req, res) {
     })
 });
 
-//Destroy route:
+//Destroy route: Deletes the product object if the active user is authenticated to do so.
 router.delete("/:id", middleware.productOwnership, function (req, res) {
     Product.findByIdAndRemove(req.params.id, function (e) {
         if (e) {

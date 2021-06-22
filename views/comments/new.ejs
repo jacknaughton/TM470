@@ -1,12 +1,11 @@
 <%- include('../partials/header.ejs'); %>
 
-    <h1>
-        Add comments to: <%= products.name %>
-    </h1>
-
     <div class="container">
         <div class="row">
             <div class="form-centre">
+                <h1>
+                    Add comment to: <%= products.name %>
+                </h1>
                 <!-- Post new products object. -->
                 <form action="/products/<%= products._id %>/comments" method="POST">
                     <div class="form-group">
@@ -18,7 +17,6 @@
                 </form>
             </div>
         </div>
-        <a href="/products">Back</a>
     </div>
 
     <%- include('../partials/footer.ejs'); %>
