@@ -54,7 +54,7 @@
                                 <% if(activeUser && comment.author.id.equals(activeUser._id)){ %>
                                     <a class="btn btn-warning"
                                         href="/products/<%=products._id%>/comments/<%=comment._id%>/edit">Edit
-                                        commennt</a>
+                                        comment</a>
                                     <form action="/products/<%=products._id%>/comments/<%=comment._id%>?_method=DELETE"
                                         method="POST">
                                         <button class="btn btn-danger">Delete comment</button>
